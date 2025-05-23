@@ -30,6 +30,25 @@ class UserService{
         }
     }
 
+    async isAuthenticated(token){
+        try{
+            const response= this.verifyToken(token); //* response--> {email: '' , id: '' , iat: '' , exp: '' }
+            if(!response){
+                throw {error:"Invalid Token"};
+            }
+            const user= await this.repository.getById(response.id);
+            if(!user){
+                throw {error:"User Not Found"}
+            }
+            return user.id;
+        }
+        catch(error){
+            console.log("Some error occured in service layer");
+            throw {error};
+        }
+    }
+
+
     createToken(user) {
         try{
             const response= jwt.sign(user,JWT_KEY,{

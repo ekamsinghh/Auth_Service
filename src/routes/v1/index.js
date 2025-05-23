@@ -6,5 +6,5 @@ const userController = require('../../controllers/user-controller');
 router.post('/signup', validateUserAuth , userController.create);
 // router.delete('/deleteuser/:id', userController.destroy);
 router.post('/signin', validateUserAuth , userController.signIn);
-
+router.get('/isAuthenticated', userController.isAuthenticated);
 module.exports= router;
