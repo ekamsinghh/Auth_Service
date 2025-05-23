@@ -26,6 +26,27 @@ const create= async (req,res)=>{
     }
 };
 
+const destroy= async (req,res)=>{
+    try{
+        await userService.destroy(req.params.id);
+        return res.status(200).json({
+            success: true,
+            message: "User Deleted Successfully",
+            err: {}
+        });
+    }
+    catch(error){
+        console.log("Some error happened in Controller layer");
+        return res.status(500).json({
+            data:{},
+            success: false,
+            message: "Something Went Wrong",
+            err: error
+        }) 
+    }
+}
+
 module.exports={
     create,
+    destroy
 }
