@@ -14,6 +14,9 @@ class UserService{
             return user;
         }
         catch(error){
+            if(error.name=='SequelizeValidationError'){
+                throw error;
+            }
             console.log("Some error occured in service layer");
             throw {error};
         }
