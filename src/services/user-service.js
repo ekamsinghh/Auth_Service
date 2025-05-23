@@ -93,7 +93,7 @@ class UserService{
         }
         catch(error){
             console.log("Something Went wrong in SignIn process");
-            throw {error};
+            throw error;
         }
     }
 

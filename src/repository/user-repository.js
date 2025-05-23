@@ -1,6 +1,7 @@
 const ValidationError = require('../utils/validation-error');
 const {User, Role} = require('../models/index');
-
+const ClientError = require('../utils/client-error');
+const { StatusCodes } = require('http-status-codes');
 class UserRepository{
 
     async createUser(data){
@@ -57,6 +58,14 @@ class UserRepository{
                     email:email
                 }
             });
+            if(!user){
+                throw new ClientError(
+                    'AttributeNotFound',
+                    'Invaid Email sent in the request',
+                    'Please check the email and try again',
+                    StatusCodes.NOT_FOUND
+                );
+            }
             return user;
         }
         catch(error){
