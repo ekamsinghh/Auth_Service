@@ -58,13 +58,15 @@ class UserRepository{
                     email:email
                 }
             });
-            if(!user){
-                throw new ClientError(
+            if(user===null){
+                const err=new ClientError(
                     'AttributeNotFound',
                     'Invaid Email sent in the request',
                     'Please check the email and try again',
                     StatusCodes.NOT_FOUND
-                );
+                )
+                // console.log(err);
+                throw err;
             }
             return user;
         }

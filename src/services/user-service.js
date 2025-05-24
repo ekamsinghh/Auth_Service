@@ -82,7 +82,13 @@ class UserService{
             const response= this.checkPassword(plainPassword,encryptedPassword);
             if(!response){
                 console.log("Password Not Matched");
-                throw {error:"Wrong Password"};
+                const error={
+                    name:'PasswordNotMatched',
+                    message:'Incorect Password',
+                    statusCode:401,
+                    success:false
+                };
+                throw {error};
             }
             //* If password Matches--> Create a token and send it to the user
             const newJwt = this.createToken({
@@ -92,6 +98,7 @@ class UserService{
             return newJwt;
         }
         catch(error){
+            // console.log(error);
             console.log("Something Went wrong in SignIn process");
             throw error;
         }

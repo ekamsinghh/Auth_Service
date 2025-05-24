@@ -15,7 +15,7 @@ const validateUserAuth= (req,res,next)=>{
 const validateIsAdminRequest= (req,res,next)=>{
     if(!req.body.id){
         return res.status(400).json({
-            message: "BEHEN KE LODE...Id tera baap dega?",
+            message: "User ID is not mentioned",
             success: false,
             data: {},
             err: 'User Id Missing'

@@ -58,6 +58,16 @@ const signIn= async (req,res)=>{
     }
     catch(error){
         console.log("Some error happened in Controller layer");
+        let err=error.error;
+        console.log(err);
+        if(err.name='AttributeNotFound'){
+                return res.status(err.statusCode).json({
+                data:{},
+                success: false,
+                message: err.message,
+                err: err.explanation
+            });
+        }
         return res.status(500).json({
             data:{},
             success: false,
